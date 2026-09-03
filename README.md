@@ -1,24 +1,88 @@
 # PMO Python Data Quality Gate
 
-This script is the data quality gate that sits between messy weekly project register exports and SQL Server load. It takes a deliberately messy CSV (11 rows with inconsistent RAG casing, currency symbols, 5 different date formats, a duplicate ProjectID, and a blank cost on a started project) and produces a clean CSV ready for the database, plus an audit log of every change made.
+A data quality pipeline that cleans messy project exports before SQL Server load.
 
-The script handles four specific data quality problems: RAG status normalization (green → Green, RED → Red, AMBER → Amber) with invalid values like "Redd" flagged for human review rather than auto-corrected; currency cleaning that strips $ signs, commas, and whitespace (converting $610 to 610.0); multi-format date parsing using an explicit list of 5 formats rather than pandas inference to avoid silently misreading ambiguous dates like 02/03/2026; and duplicate handling that drops the second P005 row but logs it rather than discarding it silently.
+---
 
-The single most important judgment call in this script is the cross-field check that distinguishes a legitimate blank cost (a not-started project like P001 where SPI and CPI are also blank) from a real data gap (a started project like P010 where SPI is 0.8152 and CPI is 0.8, but ActualCostK is missing). That distinction can't be made by looking at one column alone — it requires looking across SPI, CPI, and ActualCostK together.
+## The Problem
 
-The script outputs clean_register.csv with 10 rows (1 duplicate dropped) and data_quality_log.csv with 12 issues logged — 10 are formatting fixes applied automatically, and 2 require manual review (the P005 duplicate and P010 missing cost). The 5-line execution summary confirms: 11 rows read, 1 duplicate dropped, 10 clean rows written, 12 issues logged, 2 requiring manual review.
+Weekly project register exports arrive with inconsistent data:
+- RAG status: `green`, `RED`, `AMBER`, `Redd` (typo)
+- Currency: `$610`, `  180  `, `240.0`
+- Dates: 5 different formats in one file
+- Duplicate: P005 appears twice
+- Blank cost on a started project (P010) — invisible without cross-field checks
 
-This repository sits within a larger PMO Controls Lab portfolio that includes SQL Server schema design (normalized sponsors, projects, and project snapshots tables), data load scripts, and upcoming SQL analytics for portfolio health dashboards. The entire pipeline demonstrates how a PMO Analyst can take raw weekly exports, clean them consistently, log every decision, and produce audit-ready data for steering committee reporting.
+---
 
-Skills demonstrated: Python/pandas for data cleaning, data quality validation with controlled vocabularies, cross-field anomaly detection, ETL pre-processing patterns, audit logging, PMO domain knowledge (RAG status, EVM metrics like SPI/CPI), and judgment about which data problems need automation versus human review. The restraint shown here — no config files, no logging frameworks, no class hierarchies — is intentional, matching the tool to the problem rather than over-engineering a 10-row dataset.
+## What It Does
 
-## Screenshots
+| Issue | Fix |
+|-------|-----|
+| `green` / `RED` / `AMBER` | Normalized to `Green` / `Red` / `Amber` |
+| `Redd` | Flagged for human review — never auto-corrected |
+| `$610` / `  180  ` | Stripped to `610.0` / `180.0` |
+| 5 date formats | Parsed to `YYYY-MM-DD` using explicit format list |
+| Duplicate P005 | Dropped, logged, flagged for review |
+| Blank cost on P010 | Detected as real data gap (SPI/CPI exist) |
 
-Terminal output showing the 5-line execution summary:
-![Terminal Output](screenshots/terminal_output.png)
+---
 
-Side-by-side comparison showing transformations: RAG (green → Green, RED → Red, AMBER → Amber), currency ($610 → 610.0,   180   → 180.0), and dates normalized to YYYY-MM-DD:
+## The Key Judgment Call
+
+A blank `ActualCostK` means different things:
+
+| Project | SPI | CPI | Cost | Meaning |
+|---------|-----|-----|------|---------|
+| P001 | NULL | NULL | Blank | ✅ Fine — not started |
+| P010 | 0.8152 | 0.8 | Blank | ⚠️ Real gap — started project missing cost |
+
+This requires looking across columns — no single-field rule can catch it.
+
+---
+
+## Results
+Rows read: 11
+Duplicates dropped: 1
+Clean rows written: 10
+Issues logged: 12
+Manual review needed: 2
+
+
+### Screenshots
+
+**Terminal Output**
+![Terminal](screenshots/terminal_output.png)
+
+**Before vs After**
 ![Clean vs Messy](screenshots/clean_vs_messy.png)
 
-Data quality log showing 12 issues, with the 2 manual review rows highlighted (P005 duplicate and P010 missing cost):
+**Data Quality Log**
 ![Data Quality Log](screenshots/data_quality_log.png)
+
+---
+
+## Skills Demonstrated
+
+- Python / pandas — production data cleaning
+- Data quality — controlled vocabularies, cross-field validation
+- PMO domain — RAG status, SPI/CPI, portfolio reporting
+- Judgment — knowing what to auto-fix vs. what to flag for humans
+- Restraint — single script, no over-engineering
+
+---
+
+## Context
+
+This is one milestone in a larger PMO Controls Lab portfolio:
+
+1. **SQL Schema** — normalized sponsors, projects, snapshots
+2. **Data Load** — load scripts for SQL Server
+3. **This repo** — data quality gate (pre-load)
+4. **Next** — SQL analytics for portfolio health dashboards
+
+---
+
+## PMO Framing
+
+> *"I built this to know exactly what 'clean data' means before presenting to a steering committee — which blanks are fine, which are gaps, which values got touched. That's PMO accountability, not data engineering."*

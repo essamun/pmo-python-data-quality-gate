@@ -1,0 +1,13 @@
+row,ProjectID,field,original_value,resolution
+10,P005,ProjectID,P005,"DUPLICATE ROW — dropped, kept first occurrence, needs manual review of which is authoritative"
+2,P003,RAGOverall,green ,normalized to 'Green'
+2,P003,ActualCostK,$610,normalized to 610.0
+2,P003,SnapshotDate,02/28/2026,"parsed as %m/%d/%Y, normalized to 2026-02-28"
+4,P005,RAGOverall,RED,normalized to 'Red'
+4,P005,SnapshotDate,28-Feb-2026,"parsed as %d-%b-%Y, normalized to 2026-02-28"
+6,P007,ActualCostK,  180 ,normalized to 180.0
+7,P008,RAGOverall,green,normalized to 'Green'
+7,P008,SnapshotDate,"Feb 28, 2026","parsed as %b %d, %Y, normalized to 2026-02-28"
+9,P010,RAGOverall,AMBER,normalized to 'Amber'
+9,P010,SnapshotDate,2026/02/28,"parsed as %Y/%m/%d, normalized to 2026-02-28"
+9,P010,ActualCostK,,"MISSING ON A STARTED PROJECT — set to NULL, needs manual follow-up before load"

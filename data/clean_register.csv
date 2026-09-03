@@ -1,0 +1,11 @@
+ProjectID,ProjectName,SponsorCode,RAGOverall,ActualCostK,SPI,CPI,SnapshotDate
+P001,CRM Platform Upgrade,CRO,,,,,2026-02-28
+P002,Data Centre Migration,CTO,,,,,2026-02-28
+P003,Basel IV Compliance,CFO,Green,610.0,1.01,0.9836,2026-02-28
+P004,HR Self-Service Portal,CHRO,,,,,2026-02-28
+P005,Enterprise Risk Dashboard,CRO,Red,280.0,,0.9229,2026-02-28
+P006,Branch Network Refresh,COO,,,,,2026-02-28
+P007,Mobile Banking App v3,CDO,Green,180.0,2.1364,1.2222,2026-02-28
+P008,Finance Reporting Automation,CFO,Green,240.0,1.4643,1.17,2026-02-28
+P009,Vendor Management System,CPO,,,,,2026-02-28
+P010,Cloud Infrastructure Ph.1,CTO,Amber,,0.8152,0.8,2026-02-28

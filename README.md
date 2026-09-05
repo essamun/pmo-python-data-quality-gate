@@ -79,3 +79,26 @@ Four queries, each answering a question a steering committee actually asks:
 
 **EAC Variance by Sponsor**
 ![Sponsor Variance](screenshots/milestone2_sponsor_variance.png)
+---
+
+## Milestone 3 — Python Data Cleaning
+
+Quality gate that sits before SQL Server load. Takes messy CSV (11 rows) and produces clean CSV + audit log.
+
+**The key judgment call:** a blank field is not automatically a data quality problem.
+
+| Project | SPI | CPI | Cost | Judgment |
+|---------|-----|-----|------|----------|
+| P001 | NULL | NULL | Blank | ✅ Fine — not started |
+| P010 | 0.8152 | 0.8 | Blank | ⚠️ Real gap — started project missing cost |
+
+### Screenshots
+
+**Terminal Output**
+![Terminal](screenshots/milestone3_terminal_output.png)
+
+**Before vs After**
+![Clean vs Messy](screenshots/milestone3_clean_vs_messy.png)
+
+**Data Quality Log**
+![Data Quality Log](screenshots/milestone3_data_quality_log.png)

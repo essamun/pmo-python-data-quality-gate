@@ -107,15 +107,25 @@ Quality gate that sits before SQL Server load. Takes messy CSV (11 rows) and pro
 
 ## Repository Structure
 pmo-python-data-quality-gate/
+
 ├── README.md
+
 ├── screenshots/ # All 11 execution screenshots
+
 ├── sql/
+
 │ ├── schema.sql # Milestone 1
+
 │ ├── load_data.sql # Milestone 1
+
 │ └── milestone2_queries.sql # Milestone 2
+
 ├── src/
+
 │ └── clean_data.py # Milestone 3
+
 └── data/
+
 ├── messy_register.csv
 ├── clean_register.csv
 └── data_quality_log.csv

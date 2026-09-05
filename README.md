@@ -20,3 +20,13 @@ This repository contains all 3 milestones of the PMO Controls Lab data layer:
 ---
 
 ## The Pipeline End-to-End
+messy_register.csv SQL Server Database
+│ │
+▼ ▼
+Python Cleaning Reports & Dashboards
+│ │
+▼ │
+clean_register.csv │
+│ │
+▼ │
+SQL Server Load ────────────────┘

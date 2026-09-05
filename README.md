@@ -52,3 +52,30 @@ This repository contains all 3 milestones of the PMO Controls Lab data layer:
 
 **NULL Handling (not-started projects)**
 ![NULL Handling](screenshots/milestone1_null_handling.png)
+
+---
+
+## Milestone 2 — Core SQL Queries
+
+Four queries, each answering a question a steering committee actually asks:
+
+| Query | Question |
+|-------|----------|
+| **RAG Rollup** | "How healthy is the portfolio, and how much budget is in each bucket?" |
+| **SPI/CPI Outliers** | "Which started projects are behind schedule or over cost?" |
+| **EAC Variance** | "Where is forecast cost diverging from budget?" |
+| **EAC Variance by Sponsor** | "Which executive has the largest cost exposure?" |
+
+### Screenshots
+
+**RAG Rollup**
+![RAG Rollup](screenshots/milestone2_rag_rollup.png)
+
+**SPI/CPI Outliers**
+![SPI/CPI Outliers](screenshots/milestone2_spi_cpi_outliers.png)
+
+**EAC Variance**
+![EAC Variance](screenshots/milestone2_eac_variance.png)
+
+**EAC Variance by Sponsor**
+![Sponsor Variance](screenshots/milestone2_sponsor_variance.png)

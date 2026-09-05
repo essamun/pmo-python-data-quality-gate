@@ -149,5 +149,5 @@ pmo-python-data-quality-gate/
 
 ## PMO Framing
 
-> *"I built this because I wanted to know exactly what 'clean data' means before presenting to a steering committee — which blanks are fine, which are gaps, which values got touched. That's PMO accountability, not data engineering."*
+> *"I built this because I wanted to know exactly what 'clean data' means before presenting to a steering committee - which blanks are fine, which are gaps, which values got touched. That's PMO accountability, not data engineering."*
 

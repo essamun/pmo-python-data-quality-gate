@@ -19,8 +19,6 @@ This repository contains all 3 milestones of the PMO Controls Lab data layer:
 
 ---
 
----
-
 ## The Pipeline End-to-End
 
 **Step 1 — Python Cleaning:** `messy_register.csv` → `clean_register.csv` + `data_quality_log.csv`
@@ -28,3 +26,29 @@ This repository contains all 3 milestones of the PMO Controls Lab data layer:
 **Step 2 — SQL Load:** `clean_register.csv` → SQL Server Database (4 tables)
 
 **Step 3 — Reporting:** SQL Queries → Portfolio Reports & Dashboards
+---
+
+## Milestone 1 — Schema Design
+
+**The key design decision:** project-master data and point-in-time EVM measures are split into separate tables.
+
+| Table | What It Holds |
+|-------|---------------|
+| **Sponsors** | Executive reference data (CRO, CFO, etc.) |
+| **Projects** | Permanent project facts (name, sponsor, baseline dates/budget) |
+| **ProjectSnapshots** | Point-in-time EVM measures (SPI, CPI, RAG, EAC as of a report date) |
+| **EscalationLookup** | Standalone governance reference |
+
+### Screenshots
+
+**Schema Diagram**
+![Schema](screenshots/milestone1_schema.png)
+
+**Database Diagram**
+![Diagram](screenshots/milestone1_diagram.png)
+
+**Row Count Validation**
+![Validation](screenshots/milestone1_validation.png)
+
+**NULL Handling (not-started projects)**
+![NULL Handling](screenshots/milestone1_null_handling.png)

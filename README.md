@@ -127,7 +127,27 @@ pmo-python-data-quality-gate/
 └── data/
 
 ├── messy_register.csv
+
 ├── clean_register.csv
+
 └── data_quality_log.csv
 
+---
+
+## Skills Demonstrated
+
+| Skill | Evidence |
+|-------|----------|
+| **SQL Server** | Normalized schema design, constraints, joins, aggregations |
+| **Python/pandas** | Production-grade data cleaning |
+| **Data Quality** | Controlled vocabularies, cross-field validation, audit logging |
+| **PMO Domain** | RAG status, SPI/CPI, EAC, portfolio reporting |
+| **Judgment** | Knowing what to auto-fix vs. what to flag for humans |
+| **Restraint** | One schema, four queries, one script — no over-engineering |
+
+---
+
+## PMO Framing
+
+> *"I built this because I wanted to know exactly what 'clean data' means before presenting to a steering committee — which blanks are fine, which are gaps, which values got touched. That's PMO accountability, not data engineering."*
 
